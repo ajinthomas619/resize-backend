@@ -10,7 +10,7 @@ app.get('*', (req, res) => {
  res.sendFile(path.join(__dirname+'./../client/index.html'));
 });
 const allowCrossDomain = (req, res, next) => {
-  res.header(`Access-Control-Allow-Origin`,`https://resize-frontend.vercel.app/`;    
+  res.header(`Access-Control-Allow-Origin`,`https://resize-frontend.vercel.app/`);    
   res.header("Access-Control-Allow-Credentials", "true");
   // res.header("Access-Control-Expose-Headers", "true");
   res.header(`Access-Control-Allow-Methods`, `GET,PUT,OPTIONS,POST,DELETE`);
