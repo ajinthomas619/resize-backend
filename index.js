@@ -104,5 +104,5 @@ const data = req.body.formData.data;
     res.status(500).json({ message: 'Internal Server Error' });
   }  })
   
-const PORT = 3000
+const PORT = 8080
 app.listen(PORT,()=>console.log(`server is running on port ${PORT}`))
