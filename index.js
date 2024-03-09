@@ -11,7 +11,7 @@ app.get('*', (req, res) => {
 });
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "http://ajin.kesug.com/",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
   })
