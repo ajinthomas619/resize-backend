@@ -9,10 +9,19 @@ app.use(express.static(path.join(__dirname, 'client/dist')));
 app.get('*', (req, res) => {
  res.sendFile(path.join(__dirname+'./../client/index.html'));
 });
+const allowCrossDomain = (req, res, next) => {
+  res.header(`Access-Control-Allow-Origin`,`https://resize-frontend.vercel.app/`;    
+  res.header("Access-Control-Allow-Credentials", "true");
+  // res.header("Access-Control-Expose-Headers", "true");
+  res.header(`Access-Control-Allow-Methods`, `GET,PUT,OPTIONS,POST,DELETE`);
+  res.header("Access-Control-Allow-Headers", "Authorization, Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+  next();
+};
+
+app.use(allowCrossDomain);
 app.use(
   cors({
-    origin: "https://resize-frontend.vercel.app/",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    origin: "https://resize-frontend.vercel.app/"
    
   })
 );
