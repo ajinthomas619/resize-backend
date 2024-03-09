@@ -11,7 +11,7 @@ app.get('*', (req, res) => {
 });
 app.use(
   cors({
-    origin: "http://ajin.kesug.com/",
+    origin: "https://resize-frontend.vercel.app/",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
   })
