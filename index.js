@@ -13,7 +13,7 @@ app.use(
   cors({
     origin: "https://resize-frontend.vercel.app/",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true,
+   
   })
 );
 app.use(express.json())
