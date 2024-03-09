@@ -8,22 +8,28 @@ app.use(express.static(path.join(__dirname, 'client/dist')));
 
 app.get('*', (req, res) => {
  res.sendFile(path.join(__dirname+'./../client/index.html'));
-});
-const allowCrossDomain = (req, res, next) => {
-  res.header(`Access-Control-Allow-Origin`,`https://resize-frontend.vercel.app/`);    
-  res.header("Access-Control-Allow-Credentials", "true");
-  // res.header("Access-Control-Expose-Headers", "true");
-  res.header(`Access-Control-Allow-Methods`, `GET,PUT,OPTIONS,POST,DELETE`);
-  res.header("Access-Control-Allow-Headers", "Authorization, Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
-  next();
-};
+ const allowedOrigins = ['resize-frontend.vercel.app'];
+ app.use(cors({
+   origin: function(origin, callback){
+     if (!origin) {
+       return callback(null, true);
+     }
+ 
+     if (allowedOrigins.includes(origin)) {
+       const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+       return callback(new Error(msg), false);
+     }
+     return callback(null, true);
+   }
+ 
+ }));
 
 app.use(allowCrossDomain);
-app.use(
-  cors({
-    origin: "https://resize-frontend.vercel.app/"
+// app.use(
+//   cors({
+//     origin: "https://resize-frontend.vercel.app/"
    
-  })
+//   })
 );
 app.use(express.json())
 mongoose.connect("mongodb+srv://ajinthomas619:Motog31@cluster0.u9qv5iq.mongodb.net/apidemo",{
