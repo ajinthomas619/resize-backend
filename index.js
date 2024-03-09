@@ -9,11 +9,13 @@ app.use(express.static(path.join(__dirname, 'client/dist')));
 app.get('*', (req, res) => {
  res.sendFile(path.join(__dirname+'./../client/index.html'));
 });
-const corsOption = {
-    origin:'http://localhost:5173',
-
-}
-app.use(cors(corsOption))
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
+  })
+);
 app.use(express.json())
 mongoose.connect("mongodb+srv://ajinthomas619:Motog31@cluster0.u9qv5iq.mongodb.net/apidemo",{
 useNewUrlParser: true,
