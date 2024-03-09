@@ -41,24 +41,24 @@ app.use(express.static(path.join(__dirname, 'client/dist')));
   db.once('open', () => {
     console.log('Connected to mongodb')
   })
-  console.log("111111111")
+
   const entrySchema = new mongoose.Schema({
 
     data: String
   })
   const Entry = mongoose.model('Entry', entrySchema)
-  console.log("222222222")
+
   let countAdd = 0
   let countUpdate = 0
-  console.log("33333333")
+
 
   app.post('/add', async (req, res) => {
-    console.log("44444444")
+
     countAdd++
     const data = req.body.data
 
     try {
-      console.log("try mannnn")
+  
       const entry = new Entry({ data })
       await entry.save()
     }
@@ -68,20 +68,17 @@ app.use(express.static(path.join(__dirname, 'client/dist')));
   })
 
   app.put('/update', async (req, res) => {
-    console.log("entered updating data")
+
     countUpdate++
     const { id } = req.body
     const data = req.body.formData.data;
-    console.log("idfgdfddd", req.body.formData.data)
-    console.log("iddd", id)
+  
     const objectId = new mongoose.Types.ObjectId(id);
 
     try {
-      console.log("entered to update process")
-      console.log("whatttt", { _id: id, $set: data });
-      console.log("dataa", data)
+    
       const updatedata = await Entry.findByIdAndUpdate(id, { data: data })
-      console.log("updated data", updatedata)
+ 
 
       res.send('Data Updated Successfully')
     }
@@ -90,7 +87,7 @@ app.use(express.static(path.join(__dirname, 'client/dist')));
     }
   })
   app.get('/count', (req, res) => {
-    console.log("countadd:", countAdd, "countupdate", countUpdate)
+
     res.json({ add: countAdd, update: countUpdate })
   })
 
@@ -101,9 +98,9 @@ app.use(express.static(path.join(__dirname, 'client/dist')));
     res.json(entries)
   })
   app.delete('/delete', async (req, res) => {
-    console.log("delete entry")
+   
     try {
-      console.log("delete try entry")
+
       const entries = await Entry.deleteOne(req.body);
       console.log("delete data", entries)
       if (entries.deletedCount > 0) {
