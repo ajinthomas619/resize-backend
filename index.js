@@ -30,7 +30,7 @@ app.use(allowCrossDomain);
 //     origin: "https://resize-frontend.vercel.app/"
    
 //   })
-);
+// );
 app.use(express.json())
 mongoose.connect("mongodb+srv://ajinthomas619:Motog31@cluster0.u9qv5iq.mongodb.net/apidemo",{
 useNewUrlParser: true,
